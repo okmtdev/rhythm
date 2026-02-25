@@ -13,8 +13,8 @@
     <!-- ステージ選択画面 -->
     <div id="select-screen" class="screen active">
       <div class="select-inner">
-        <h1 class="title">りずむ de あそぼう!</h1>
-        <p class="subtitle">りずむに あわせて アクション!</p>
+        <h1 class="title">かべを かわそう!</h1>
+        <p class="subtitle">かべに あわせて じゃんぷ！ しゃがむ！</p>
 
         <div class="controls-box">
           <div class="control-row">
@@ -29,25 +29,25 @@
             <span class="control-sep">/</span>
             <span class="key-badge small">みぎクリック</span>
             <span class="control-arrow">→</span>
-            <span class="action-label slide-color">もぐる</span>
+            <span class="action-label slide-color">しゃがむ</span>
           </div>
-          <p class="touch-note">スマホ: ひだり たっぷ = じゃんぷ / みぎ たっぷ = もぐる</p>
+          <p class="touch-note">スマホ: ひだり たっぷ = じゃんぷ / みぎ たっぷ = しゃがむ</p>
         </div>
 
         <div class="stage-buttons">
           <button class="stage-btn easy" data-stage="easy">
             <span class="stage-name">かんたん</span>
-            <span class="stage-info">30 びょう / ゆっくり</span>
+            <span class="stage-info">30 びょう</span>
             <span class="stage-best" id="best-easy">べすと: --</span>
           </button>
           <button class="stage-btn normal" data-stage="normal">
             <span class="stage-name">ふつう</span>
-            <span class="stage-info">60 びょう / ふつう</span>
+            <span class="stage-info">60 びょう</span>
             <span class="stage-best" id="best-normal">べすと: --</span>
           </button>
           <button class="stage-btn hard" data-stage="hard">
             <span class="stage-name">むずかしい</span>
-            <span class="stage-info">60 びょう / はやい</span>
+            <span class="stage-info">60 びょう</span>
             <span class="stage-best" id="best-hard">べすと: --</span>
           </button>
         </div>
@@ -67,20 +67,22 @@
 
     <!-- ゲーム画面 -->
     <div id="game-screen" class="screen hidden">
-      <div id="game-hud">
-        <div id="timer-display">
-          <span class="hud-label">じかん</span>
-          <span class="hud-value" id="timer-value">30</span>
+      <div id="game-wrapper">
+        <div id="game-hud">
+          <div id="timer-display">
+            <span class="hud-label">じかん</span>
+            <span class="hud-value" id="timer-value">30</span>
+          </div>
+          <div id="score-display">
+            <span class="hud-label">ぽいんと</span>
+            <span class="hud-value" id="score-value">0</span>
+          </div>
         </div>
-        <div id="score-display">
-          <span class="hud-label">ぽいんと</span>
-          <span class="hud-value" id="score-value">0</span>
+        <canvas id="game-canvas"></canvas>
+        <div id="touch-zones">
+          <div class="touch-zone touch-left">じゃんぷ</div>
+          <div class="touch-zone touch-right">しゃがむ</div>
         </div>
-      </div>
-      <canvas id="game-canvas"></canvas>
-      <div id="touch-zones">
-        <div class="touch-zone touch-left">じゃんぷ</div>
-        <div class="touch-zone touch-right">もぐる</div>
       </div>
     </div>
 

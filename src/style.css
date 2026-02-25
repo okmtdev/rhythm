@@ -311,6 +311,14 @@ body {
 #game-screen {
   background: #000;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#game-wrapper {
+  position: relative;
+  width: min(100dvw, calc(100dvh * 800 / 450));
+  height: min(100dvh, calc(100dvw * 450 / 800));
 }
 
 #game-hud {
@@ -356,9 +364,9 @@ body {
 }
 
 #game-canvas {
+  display: block;
   width: 100%;
   height: 100%;
-  display: block;
 }
 
 /* Touch zone hints */
@@ -370,6 +378,7 @@ body {
   display: flex;
   pointer-events: none;
   z-index: 10;
+  width: 100%;
 }
 
 .touch-zone {

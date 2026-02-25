@@ -254,50 +254,9 @@ function handleAction(action) {
 
   state.actionCooldown = 0.3;
 
-  // Character animation
+  // Character animation only - scoring happens when obstacle passes character
   state.character.action = action;
   state.character.animTimer = ANIM_DURATION;
-
-  // Find nearest unresolved obstacle in timing zone
-  const config = STAGES[state.difficulty];
-  const zone = config.timingZone;
-  let nearest = null;
-  let nearestDist = Infinity;
-
-  for (const obs of state.obstacles) {
-    if (obs.resolved) continue;
-    const dist = Math.abs(obs.x - CHAR_X);
-    if (dist <= zone && dist < nearestDist) {
-      nearest = obs;
-      nearestDist = dist;
-    }
-  }
-
-  if (nearest) {
-    if (
-      (action === 'jump' && nearest.type === 'jump') ||
-      (action === 'slide' && nearest.type === 'slide')
-    ) {
-      // Correct!
-      state.score += 2;
-      nearest.resolved = true;
-      addEffect('+2', CHAR_X + 40, 260, '#4CAF50');
-      setExpression('happy');
-    } else {
-      // Wrong action
-      state.score -= 1;
-      nearest.resolved = true;
-      addEffect('-1', CHAR_X + 40, 260, '#F44336');
-      setExpression('sad');
-    }
-  } else {
-    // No obstacle in zone
-    state.score -= 1;
-    addEffect('-1', CHAR_X + 40, 260, '#F44336');
-    setExpression('sad');
-  }
-
-  updateHUD();
 }
 
 // ---- Effects ----
@@ -394,14 +353,22 @@ function updateGame(dt) {
     obs.x -= config.speed * dt;
   }
 
-  // Check missed obstacles
-  const zone = config.timingZone;
+  // Resolve obstacles when they reach the character
   for (const obs of state.obstacles) {
-    if (!obs.resolved && obs.x < CHAR_X - zone - 10) {
+    if (!obs.resolved && obs.x < CHAR_X + 15) {
       obs.resolved = true;
-      state.score -= 1;
-      addEffect('-1', CHAR_X, 280, '#F44336');
-      setExpression('sad');
+      const ch = state.character;
+      if (ch.action === obs.type && ch.animTimer > 0) {
+        // Successfully dodged!
+        state.score += 2;
+        addEffect('+2', CHAR_X + 40, 260, '#4CAF50');
+        setExpression('happy');
+      } else {
+        // Got hit
+        state.score -= 1;
+        addEffect('-1', CHAR_X + 40, 260, '#F44336');
+        setExpression('sad');
+      }
       updateHUD();
     }
   }
