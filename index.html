@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <title>りずむ de あそぼう!</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎵</text></svg>" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ステージ選択画面 -->
+    <div id="select-screen" class="screen active">
+      <div class="select-inner">
+        <h1 class="title">りずむ de あそぼう!</h1>
+        <p class="subtitle">りずむに あわせて アクション!</p>
+
+        <div class="controls-box">
+          <div class="control-row">
+            <span class="key-badge">Z</span>
+            <span class="control-sep">/</span>
+            <span class="key-badge small">ひだりクリック</span>
+            <span class="control-arrow">→</span>
+            <span class="action-label jump-color">じゃんぷ</span>
+          </div>
+          <div class="control-row">
+            <span class="key-badge">M</span>
+            <span class="control-sep">/</span>
+            <span class="key-badge small">みぎクリック</span>
+            <span class="control-arrow">→</span>
+            <span class="action-label slide-color">もぐる</span>
+          </div>
+          <p class="touch-note">スマホ: ひだり たっぷ = じゃんぷ / みぎ たっぷ = もぐる</p>
+        </div>
+
+        <div class="stage-buttons">
+          <button class="stage-btn easy" data-stage="easy">
+            <span class="stage-name">かんたん</span>
+            <span class="stage-info">30 びょう / ゆっくり</span>
+            <span class="stage-best" id="best-easy">べすと: --</span>
+          </button>
+          <button class="stage-btn normal" data-stage="normal">
+            <span class="stage-name">ふつう</span>
+            <span class="stage-info">60 びょう / ふつう</span>
+            <span class="stage-best" id="best-normal">べすと: --</span>
+          </button>
+          <button class="stage-btn hard" data-stage="hard">
+            <span class="stage-name">むずかしい</span>
+            <span class="stage-info">60 びょう / はやい</span>
+            <span class="stage-best" id="best-hard">べすと: --</span>
+          </button>
+        </div>
+
+        <button class="history-btn" id="history-btn">きろく</button>
+
+        <!-- 履歴モーダル -->
+        <div id="history-modal" class="modal hidden">
+          <div class="modal-content">
+            <h2>あそんだ きろく</h2>
+            <div id="history-list"></div>
+            <button class="modal-close" id="history-close">とじる</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ゲーム画面 -->
+    <div id="game-screen" class="screen hidden">
+      <div id="game-hud">
+        <div id="timer-display">
+          <span class="hud-label">じかん</span>
+          <span class="hud-value" id="timer-value">30</span>
+        </div>
+        <div id="score-display">
+          <span class="hud-label">ぽいんと</span>
+          <span class="hud-value" id="score-value">0</span>
+        </div>
+      </div>
+      <canvas id="game-canvas"></canvas>
+      <div id="touch-zones">
+        <div class="touch-zone touch-left">じゃんぷ</div>
+        <div class="touch-zone touch-right">もぐる</div>
+      </div>
+    </div>
+
+    <!-- 結果画面 -->
+    <div id="result-screen" class="screen hidden">
+      <div class="result-card">
+        <h2 id="result-message">すごい!</h2>
+        <div id="result-stage-name" class="result-stage"></div>
+        <div class="result-score-box">
+          <span class="result-score-number" id="result-score">0</span>
+          <span class="result-score-unit">ぽいんと</span>
+        </div>
+        <div id="result-best" class="result-best"></div>
+        <button id="share-btn" class="share-btn">LINE で しぇあ</button>
+        <p id="return-hint" class="return-hint hidden">たっぷ して もどる</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
