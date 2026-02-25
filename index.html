@@ -67,20 +67,22 @@
 
     <!-- ゲーム画面 -->
     <div id="game-screen" class="screen hidden">
-      <div id="game-hud">
-        <div id="timer-display">
-          <span class="hud-label">じかん</span>
-          <span class="hud-value" id="timer-value">30</span>
+      <div id="game-area">
+        <div id="game-hud">
+          <div id="timer-display">
+            <span class="hud-label">じかん</span>
+            <span class="hud-value" id="timer-value">30</span>
+          </div>
+          <div id="score-display">
+            <span class="hud-label">ぽいんと</span>
+            <span class="hud-value" id="score-value">0</span>
+          </div>
         </div>
-        <div id="score-display">
-          <span class="hud-label">ぽいんと</span>
-          <span class="hud-value" id="score-value">0</span>
+        <canvas id="game-canvas"></canvas>
+        <div id="touch-zones">
+          <div class="touch-zone touch-left">じゃんぷ</div>
+          <div class="touch-zone touch-right">もぐる</div>
         </div>
-      </div>
-      <canvas id="game-canvas"></canvas>
-      <div id="touch-zones">
-        <div class="touch-zone touch-left">じゃんぷ</div>
-        <div class="touch-zone touch-right">もぐる</div>
       </div>
     </div>
 

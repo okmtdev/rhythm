@@ -278,24 +278,20 @@ function handleAction(action) {
       (action === 'jump' && nearest.type === 'jump') ||
       (action === 'slide' && nearest.type === 'slide')
     ) {
-      // Correct!
+      // Successfully dodged!
       state.score += 2;
       nearest.resolved = true;
       addEffect('+2', CHAR_X + 40, 260, '#4CAF50');
       setExpression('happy');
     } else {
-      // Wrong action
+      // Wrong action - failed to dodge
       state.score -= 1;
       nearest.resolved = true;
       addEffect('-1', CHAR_X + 40, 260, '#F44336');
       setExpression('sad');
     }
-  } else {
-    // No obstacle in zone
-    state.score -= 1;
-    addEffect('-1', CHAR_X + 40, 260, '#F44336');
-    setExpression('sad');
   }
+  // No obstacle nearby - just play animation, no penalty
 
   updateHUD();
 }
@@ -828,9 +824,9 @@ function setupInput() {
     }
   });
 
-  // Mouse on game screen
-  const gameScreen = $('game-screen');
-  gameScreen.addEventListener('mousedown', (e) => {
+  // Mouse on game area
+  const gameArea = $('game-area');
+  gameArea.addEventListener('mousedown', (e) => {
     if (state.screen !== 'game' || state.gamePhase !== 'playing') return;
     if (e.button === 0) {
       e.preventDefault();
@@ -841,16 +837,16 @@ function setupInput() {
       handleAction('slide');
     }
   });
-  gameScreen.addEventListener('contextmenu', (e) => e.preventDefault());
+  gameArea.addEventListener('contextmenu', (e) => e.preventDefault());
 
-  // Touch on game screen (left half = jump, right half = slide)
-  gameScreen.addEventListener(
+  // Touch on game area (left half = jump, right half = slide)
+  gameArea.addEventListener(
     'touchstart',
     (e) => {
       if (state.screen !== 'game' || state.gamePhase !== 'playing') return;
       e.preventDefault();
       const touch = e.touches[0];
-      const rect = gameScreen.getBoundingClientRect();
+      const rect = gameArea.getBoundingClientRect();
       const x = touch.clientX - rect.left;
       if (x < rect.width / 2) {
         handleAction('jump');
